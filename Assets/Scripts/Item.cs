@@ -10,9 +10,9 @@ public class Item
     public int value{get; set;}
     public bool isLike{get; set;}
     public int grade{get; set;}
-    public Image image{get; set;}
+    public Sprite image{get; set;}
 
-    public Item(string _name, string _detail="", int _value=0, int _grade=0, Image _image = null)
+    public Item(string _name, string _detail="", int _value=0, int _grade=0, Sprite _image = null)
     {
         name = _name;
         detail = _detail;

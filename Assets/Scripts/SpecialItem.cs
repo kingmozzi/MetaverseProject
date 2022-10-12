@@ -8,9 +8,9 @@ public class SpecialItem
     public string name{get; set;}
     public string detail{get; set;}
     public bool isLike{get; set;}
-    public Image image{get; set;}
+    public Sprite image{get; set;}
 
-    public SpecialItem(string _name, string _detail="", Image _image = null)
+    public SpecialItem(string _name, string _detail="", Sprite _image = null)
     {
         name = _name;
         detail = _detail;

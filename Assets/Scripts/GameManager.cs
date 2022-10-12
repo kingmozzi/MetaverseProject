@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject InfoNpc;
     public GameObject ServiceInfo;
     public GameObject ServiceInfoNpc;
+    public GameObject LikeInfo;
+    public GameObject LikeInfoNpc;
     public Camera getCamera;
     public List<Item> items;
     public List<Item> cart;
@@ -56,6 +58,10 @@ public class GameManager : MonoBehaviour
                 {
                     ServiceInfoNpcClicked();
                 }
+                else if(hit.collider.gameObject == LikeInfoNpc)
+                {
+                    LikeInfoNpcClicked();
+                }
                 
             }
         }
@@ -91,6 +97,18 @@ public class GameManager : MonoBehaviour
         isInfo=false;
     }
 
+    public void LikeInfoNpcClicked()
+    {
+        LikeInfo.SetActive(true);
+        isInfo = true;
+    }
+
+    public void LikeInfoExit()
+    {
+        LikeInfo.SetActive(false);
+        isInfo = false;
+    }
+
     public void addCart(int index)
     {
         items[index].isLike = true;
@@ -102,8 +120,22 @@ public class GameManager : MonoBehaviour
         cart.Remove(items[index]);
     }
 
+    public void addSpCart(int index)
+    {
+        SpItems[index].isLike = true;
+        SpCart.Add(SpItems[index]);
+    }
+    public void deleteSpCart(int index)
+    {
+        SpItems[index].isLike = false;
+        SpCart.Remove(SpItems[index]);
+    }
+    
+
+    //가상 데이터 입력
+
     public int itemLength = 3;
-    public Image suspension;
+    public Sprite suspension;
     string[] names = {"네오테크 서스펜션 Basic", "네오테크 서스펜션 Comport", "네오테크 서스펜션 Sports"}; 
     string[] details = {"가장 기본적인 튜닝용 코일오버 서스펜션 입니다. 자신이 원하는 차고를 맞출 수 있으며 빨라진 핸들링 반응을 느끼실 수 있는 제품입니다.",
                         "튜닝 입문자들에게 가장 추천드리는 서스펜션 입니다. 감쇠력 조절이 가능하기 때문에 편안한 승차감, 우수한 핸들링을 선택적으로 세팅이 가능합니다. 스테디 셀러이자 베스트셀러인 타입입니다.",
@@ -123,8 +155,10 @@ public class GameManager : MonoBehaviour
         return temp;
     }
 
+    public int ServiceItemLength = 0;
+
     public int SpItemLength = 3;
-    public Image[] SpImages;
+    public Sprite[] SpImages;
     string[] SpNames = {"렉카용 쇽업소버", "화물 및 승합 스타렉스용 속업쇼버", "1톤 윙카용 SAFETY KIT"};
     string[] SpDetails = {"사고차량을 안전하게 끌기 위해 안정된 차고를 확보할 수 있도록 쇽업소버의 세팅을 변경하고 차량 견인 시 발생할 수 있는 앞바퀴 들림 현상을 완화하였습니다.",
                             "고속주행이 불가피한 긴급 호송 차량이나 적재 무게가 큰 화물 운송 차량의 안전한 운행을 위해 승차감을 최대한 유지 하면서 무게중심 이동 제어, 핸들링 개선을 통해 주행 안정성을 높였습니다.",

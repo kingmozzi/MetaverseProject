@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonManager2 : MonoBehaviour
+public class ButtonManager3 : MonoBehaviour
 {
     public GameObject PartPanel;
     public GameObject PartNull;
@@ -14,7 +14,6 @@ public class ButtonManager2 : MonoBehaviour
     public Text InfoKindText;
     public GameManager Manager;
     public Image DetailImage;
-    public ButtonManager3 btnManager3;
 
     public GameObject DetailPanel;
     public Image namePanel;
@@ -47,9 +46,30 @@ public class ButtonManager2 : MonoBehaviour
     int SpX = 190;
     int SpY = 355;
 
+    List<GameObject> prefabs;
+
+
     // Start is called before the first frame update
     void Awake()
     {  
+       prefabs = new List<GameObject>();
+    }
+
+    public void Instants()
+    {
+        x=190;
+        y=355;
+        SpX = 190;
+        SpY = 355;
+        if(prefabs != null)
+        {
+            for(int i=0;i<prefabs.Count;i++)
+            {
+                prefabs[i].SetActive(false);
+            }
+        }
+        prefabs = new List<GameObject>();
+
         InstantPart();
         InstantService();
         InstantSpecial();
@@ -57,13 +77,14 @@ public class ButtonManager2 : MonoBehaviour
 
     void InstantPart()
     {
-        if(Manager.itemLength == 0)
+        
+        if(Manager.cart.Count == 0)
         {
             PartNull.SetActive(true);
         }
-        for(int i=0;i<Manager.itemLength;i++)
+        for(int i=0;i<Manager.cart.Count;i++)
         {
-            Item temp = Manager.items[i];
+            Item temp = Manager.cart[i];
             
             getVariable = prefab.GetComponent<ItemPrefab>();
             Vector2 createPoint = new Vector2(x, y);
@@ -86,9 +107,11 @@ public class ButtonManager2 : MonoBehaviour
                 case 3:
                     break;
             }
-
-            Instantiate(prefab, createPoint, Quaternion.identity, PartPanel.transform);
             
+            GameObject insTemp;
+            insTemp = Instantiate(prefab, createPoint, Quaternion.identity, PartPanel.transform);
+            prefabs.Add(insTemp);
+
             x+=width;
             if((i+1)%5==0)
             {
@@ -107,11 +130,11 @@ public class ButtonManager2 : MonoBehaviour
 
     void InstantSpecial()
     {
-        if(Manager.SpItemLength == 0)
+        if(Manager.SpCart.Count == 0)
         {
             SpecialNull.SetActive(true);
         }
-        for(int i=0;i<Manager.SpItemLength;i++)
+        for(int i=0;i<Manager.SpCart.Count;i++)
         {
             SpecialItem temp = Manager.SpItems[i];
 
@@ -123,7 +146,9 @@ public class ButtonManager2 : MonoBehaviour
             getVariable.SpIndex = i;
             getVariable.index = -1;
 
-            Instantiate(prefab, createPoint, Quaternion.identity, SpecialPanel.transform);
+            GameObject insTemp;
+            insTemp = Instantiate(prefab, createPoint, Quaternion.identity, SpecialPanel.transform);
+            prefabs.Add(insTemp);
 
             SpX+=width;
             if((i+1)%5==0)
@@ -228,7 +253,6 @@ public class ButtonManager2 : MonoBehaviour
         else{
             Manager.deleteCart(detailIndex);
         }
-        btnManager3.Instants();
     }
 
     public void DetailExit()
