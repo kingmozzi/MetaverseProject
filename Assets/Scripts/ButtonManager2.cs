@@ -180,6 +180,8 @@ public class ButtonManager2 : MonoBehaviour
 
     public void ServiceInfoExit()
     {
+        DetailExit();
+        SpDetailExit();
         Manager.ServiceInfoExit();
     }
 
@@ -217,16 +219,15 @@ public class ButtonManager2 : MonoBehaviour
 
     public void toggleListener()
     {
-        if(detailIndex == -1)
+        if(detailIndex != -1)
         {
-            return;
-        }
-        if(isLike.isOn)
-        {
-            Manager.addCart(detailIndex);
-        }
-        else{
-            Manager.deleteCart(detailIndex);
+            if(isLike.isOn)
+            {
+                Manager.addCart(detailIndex);
+            }
+            else{
+                Manager.deleteCart(detailIndex);
+            }
         }
         btnManager3.Instants();
     }
@@ -253,17 +254,17 @@ public class ButtonManager2 : MonoBehaviour
 
     public void SpToggleListener()
     {
-        if(SpDetailIndex == -1)
+        if(SpDetailIndex != -1)
         {
-            return;
+            if(SpIsLike.isOn)
+            {
+                Manager.addSpCart(SpDetailIndex);
+            }
+            else{
+                Manager.deleteSpCart(SpDetailIndex);
+            }
         }
-        if(SpIsLike.isOn)
-        {
-            Manager.addSpCart(SpDetailIndex);
-        }
-        else{
-            Manager.deleteSpCart(SpDetailIndex);
-        }
+        btnManager3.Instants();
     }
 
 

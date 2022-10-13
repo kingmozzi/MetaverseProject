@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject ServiceInfoNpc;
     public GameObject LikeInfo;
     public GameObject LikeInfoNpc;
+    public GameObject Community;
+    public GameObject CommunityNpc;
     public Camera getCamera;
     public List<Item> items;
     public List<Item> cart;
@@ -62,6 +64,10 @@ public class GameManager : MonoBehaviour
                 {
                     LikeInfoNpcClicked();
                 }
+                else if(hit.collider.gameObject == CommunityNpc)
+                {
+                    CommunityNpcClicked();
+                }
                 
             }
         }
@@ -92,20 +98,38 @@ public class GameManager : MonoBehaviour
     }
 
     public void ServiceInfoExit()
-    {
+    {   
         ServiceInfo.SetActive(false);
         isInfo=false;
     }
 
     public void LikeInfoNpcClicked()
     {
-        LikeInfo.SetActive(true);
-        isInfo = true;
+        if(!isInfo)
+        {
+            LikeInfo.SetActive(true);
+            isInfo = true;
+        }
     }
 
     public void LikeInfoExit()
     {
         LikeInfo.SetActive(false);
+        isInfo = false;
+    }
+
+    public void CommunityNpcClicked()
+    {
+        if(!isInfo)
+        {
+            Community.SetActive(true);
+            isInfo = true;
+        }
+    }
+
+    public void CommunityExit()
+    {
+        Community.SetActive(false);
         isInfo = false;
     }
 
@@ -119,6 +143,11 @@ public class GameManager : MonoBehaviour
         items[index].isLike = false;
         cart.Remove(items[index]);
     }
+    public void deleteCartFromCart(int index)
+    {
+        cart[index].isLike = false;
+        cart.Remove(cart[index]);
+    }
 
     public void addSpCart(int index)
     {
@@ -130,6 +159,13 @@ public class GameManager : MonoBehaviour
         SpItems[index].isLike = false;
         SpCart.Remove(SpItems[index]);
     }
+    public void deleteSpCartFromCart(int index)
+    {
+        SpCart[index].isLike = false;
+        SpCart.Remove(SpCart[index]);
+    }
+
+    
     
 
     //가상 데이터 입력

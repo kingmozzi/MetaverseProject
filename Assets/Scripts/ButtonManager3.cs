@@ -31,7 +31,7 @@ public class ButtonManager3 : MonoBehaviour
     public Toggle SpIsLike;
 
     public GameObject prefab;
-    public ItemPrefab getVariable;
+    public LikePrefab getVariable;
 
     string companyName;
     int detailIndex;
@@ -46,13 +46,10 @@ public class ButtonManager3 : MonoBehaviour
     int SpX = 190;
     int SpY = 355;
 
-    List<GameObject> prefabs;
-
-
     // Start is called before the first frame update
     void Awake()
     {  
-       prefabs = new List<GameObject>();
+       Instants();
     }
 
     public void Instants()
@@ -61,14 +58,6 @@ public class ButtonManager3 : MonoBehaviour
         y=355;
         SpX = 190;
         SpY = 355;
-        if(prefabs != null)
-        {
-            for(int i=0;i<prefabs.Count;i++)
-            {
-                prefabs[i].SetActive(false);
-            }
-        }
-        prefabs = new List<GameObject>();
 
         InstantPart();
         InstantService();
@@ -77,16 +66,17 @@ public class ButtonManager3 : MonoBehaviour
 
     void InstantPart()
     {
-        
+        PartNull.SetActive(false);
         if(Manager.cart.Count == 0)
         {
             PartNull.SetActive(true);
+            return;
         }
         for(int i=0;i<Manager.cart.Count;i++)
         {
             Item temp = Manager.cart[i];
             
-            getVariable = prefab.GetComponent<ItemPrefab>();
+            getVariable = prefab.GetComponent<LikePrefab>();
             Vector2 createPoint = new Vector2(x, y);
             getVariable.itemImage.sprite = temp.image;
             getVariable.nameText.text = temp.name;
@@ -108,9 +98,7 @@ public class ButtonManager3 : MonoBehaviour
                     break;
             }
             
-            GameObject insTemp;
-            insTemp = Instantiate(prefab, createPoint, Quaternion.identity, PartPanel.transform);
-            prefabs.Add(insTemp);
+            Instantiate(prefab, createPoint, Quaternion.identity, PartPanel.transform);
 
             x+=width;
             if((i+1)%5==0)
@@ -122,23 +110,27 @@ public class ButtonManager3 : MonoBehaviour
 
     void InstantService()
     {
+        ServiceNull.SetActive(false);
         if(Manager.ServiceItemLength == 0)
         {
             ServiceNull.SetActive(true);
+            return;
         }
     }
 
     void InstantSpecial()
     {
+        SpecialNull.SetActive(false);
         if(Manager.SpCart.Count == 0)
         {
             SpecialNull.SetActive(true);
+            return;
         }
         for(int i=0;i<Manager.SpCart.Count;i++)
         {
-            SpecialItem temp = Manager.SpItems[i];
+            SpecialItem temp = Manager.SpCart[i];
 
-            getVariable = prefab.GetComponent<ItemPrefab>();
+            getVariable = prefab.GetComponent<LikePrefab>();
             Vector2 createPoint = new Vector2(SpX, SpY);
             getVariable.itemBacground.color = new Color(124/255f, 126/255f, 125/255f);
             getVariable.nameText.text = temp.name;
@@ -146,9 +138,9 @@ public class ButtonManager3 : MonoBehaviour
             getVariable.SpIndex = i;
             getVariable.index = -1;
 
-            GameObject insTemp;
-            insTemp = Instantiate(prefab, createPoint, Quaternion.identity, SpecialPanel.transform);
-            prefabs.Add(insTemp);
+
+            Instantiate(prefab, createPoint, Quaternion.identity, SpecialPanel.transform);
+
 
             SpX+=width;
             if((i+1)%5==0)
@@ -203,14 +195,16 @@ public class ButtonManager3 : MonoBehaviour
         InfoKindText.text += "/특장";
     }
 
-    public void ServiceInfoExit()
+    public void LikeInfoExit()
     {
-        Manager.ServiceInfoExit();
+        DetailExit();
+        SpDetailExit();
+        Manager.LikeInfoExit();
     }
 
     public void ActiveDetail(int index)
     {
-        Item temp = Manager.items[index];
+        Item temp = Manager.cart[index];
         detailIndex = -1;
         switch(temp.grade)
         {
@@ -242,17 +236,17 @@ public class ButtonManager3 : MonoBehaviour
 
     public void toggleListener()
     {
-        if(detailIndex == -1)
+        if(detailIndex != -1)
         {
-            return;
+            if(isLike.isOn)
+            {
+                //Manager.addCart(detailIndex);
+            }
+            else{
+                Manager.deleteCartFromCart(detailIndex);
+            }
         }
-        if(isLike.isOn)
-        {
-            Manager.addCart(detailIndex);
-        }
-        else{
-            Manager.deleteCart(detailIndex);
-        }
+        Instants();
     }
 
     public void DetailExit()
@@ -263,7 +257,7 @@ public class ButtonManager3 : MonoBehaviour
 
     public void ActiveSpDetail(int index)
     {
-        SpecialItem temp = Manager.SpItems[index];
+        SpecialItem temp = Manager.SpCart[index];
         SpDetailIndex = -1;
 
         SpItemName.text = temp.name;
@@ -277,17 +271,17 @@ public class ButtonManager3 : MonoBehaviour
 
     public void SpToggleListener()
     {
-        if(SpDetailIndex == -1)
+        if(detailIndex != -1)
         {
-            return;
+            if(isLike.isOn)
+            {
+                //Manager.addCart(detailIndex);
+            }
+            else{
+                Manager.deleteSpCartFromCart(SpDetailIndex);
+            }
         }
-        if(SpIsLike.isOn)
-        {
-            Manager.addSpCart(SpDetailIndex);
-        }
-        else{
-            Manager.deleteSpCart(SpDetailIndex);
-        }
+        Instants();
     }
 
 
