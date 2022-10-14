@@ -100,7 +100,7 @@ public class TPS : MonoBehaviour
     {
         if(jDown && !isJump)
         {
-            rigid.AddForce(Vector3.up * 9, ForceMode.Impulse);
+            rigid.AddForce(Vector3.up * 10, ForceMode.Impulse);
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
             isJump = true;

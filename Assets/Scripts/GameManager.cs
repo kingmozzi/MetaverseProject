@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject Player;
     public GameObject CompanyInfo;
     public GameObject InfoNpc;
     public GameObject ServiceInfo;
@@ -13,6 +14,9 @@ public class GameManager : MonoBehaviour
     public GameObject LikeInfoNpc;
     public GameObject Community;
     public GameObject CommunityNpc;
+    public GameObject VideoMode;
+    public GameObject VideoModeNpc;
+    public GameObject VideoModeCamera;
     public Camera getCamera;
     public List<Item> items;
     public List<Item> cart;
@@ -67,6 +71,10 @@ public class GameManager : MonoBehaviour
                 else if(hit.collider.gameObject == CommunityNpc)
                 {
                     CommunityNpcClicked();
+                }
+                else if(hit.collider.gameObject == VideoModeNpc)
+                {
+                    VideoModeNpcClicked();
                 }
                 
             }
@@ -131,6 +139,25 @@ public class GameManager : MonoBehaviour
     {
         Community.SetActive(false);
         isInfo = false;
+    }
+
+    void VideoModeNpcClicked()
+    {
+        if(!isInfo)
+        {
+            VideoMode.SetActive(true);
+            isInfo = true;
+            Player.SetActive(false);
+            VideoModeCamera.SetActive(true);
+        }
+    }
+
+    public void VideoModeExit()
+    {
+        VideoMode.SetActive(false);
+        isInfo = false;
+        VideoModeCamera.SetActive(false);
+        Player.SetActive(true);
     }
 
     public void addCart(int index)

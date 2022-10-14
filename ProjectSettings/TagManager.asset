@@ -4,9 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Cube1
+  - Cube2
+  - Cube3
   - Floor
   - Wall
   - Like
+  - bullet
   layers:
   - Default
   - TransparentFX
