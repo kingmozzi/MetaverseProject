@@ -244,6 +244,7 @@ public class ButtonManager3 : MonoBehaviour
             }
             else{
                 Manager.deleteCartFromCart(detailIndex);
+                DetailExit();
             }
         }
         Instants();
@@ -271,7 +272,7 @@ public class ButtonManager3 : MonoBehaviour
 
     public void SpToggleListener()
     {
-        if(detailIndex != -1)
+        if(SpDetailIndex != -1)
         {
             if(isLike.isOn)
             {
@@ -279,6 +280,7 @@ public class ButtonManager3 : MonoBehaviour
             }
             else{
                 Manager.deleteSpCartFromCart(SpDetailIndex);
+                SpDetailExit();
             }
         }
         Instants();
