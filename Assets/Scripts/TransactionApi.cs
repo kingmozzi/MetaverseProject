@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,45 @@ using System.Text;
 
 public class TransactionApi : MonoBehaviour
 {
+    [Serializable]
+    public class Post
+    {
+        public int id;
+        public string title;
+        public string writer;
+        public string create_date;
+        public int count;
+        public int recommend;
+        public string password;
+        public string contents;
+    }
+
+    public static class JsonHelper 
+    {
+        public static T[] FromJson<T>(string json)
+        {
+            Wrapper<T> wrapper = UnityEngine.JsonUtility.FromJson<Wrapper<T>>(json);
+            return wrapper.data;
+        }
+        
+        public static string ToJson<T>(T[] array)
+        {
+            Wrapper<T> wrapper = new Wrapper<T>();
+            wrapper.data = array;
+            return JsonUtility.ToJson(wrapper);
+        }
+
+        [Serializable]
+        private class Wrapper<T>
+        {
+            public T[] data;
+        }    
+    }
     // Start is called before the first frame update
     void Start()
     {
         //StartCoroutine(DataPost());
-        //StartCoroutine(DataGet());
+        StartCoroutine(DataGet());
         //StartCoroutine(DataGetOne(1));
         //StartCoroutine(DataUpdate(7));
         //StartCoroutine(DataDelete(4));
@@ -28,7 +63,13 @@ public class TransactionApi : MonoBehaviour
             Debug.Log(www.error);
         }
         else {
-            Debug.Log(www.downloadHandler.text);
+            //Debug.Log(www.downloadHandler.text);
+            var temps = JsonHelper.FromJson<Post>("{\"data\":"+www.downloadHandler.text+"}");
+            //Debug.Log("{\"posts:\":"+www.downloadHandler.text+"}");
+            for(int i=0; i<temps.Length;i++)
+            {
+                Debug.Log(temps[i].title);
+            }
         }
     }
 
@@ -72,6 +113,14 @@ public class TransactionApi : MonoBehaviour
         else {
             // Show results as text
             Debug.Log(www.downloadHandler.text);
+            Post temp = JsonUtility.FromJson<Post>(www.downloadHandler.text);
+            Debug.Log(temp.id);
+            Debug.Log(temp.title);
+            Debug.Log(temp.create_date);
+            Debug.Log(temp.writer);
+            Debug.Log(temp.password);
+            Debug.Log(temp.contents);
+
         }
     }
 
