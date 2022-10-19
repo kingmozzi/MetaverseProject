@@ -9,6 +9,8 @@ public class ButtonManager4 : MonoBehaviour
     public GameObject RequestPanel;
     public GameObject CommuPanel;
     public GameObject CreatePanel;
+    public GameObject ReadPanel;
+    public TransactionApi transaction;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,7 @@ public class ButtonManager4 : MonoBehaviour
         RequestPanel.SetActive(false);
         CommuPanel.SetActive(false);
         CreatePanel.SetActive(false);
+        ReadPanel.SetActive(false);
     }
 
     public void ActiveSelect()
@@ -58,5 +61,22 @@ public class ButtonManager4 : MonoBehaviour
     {
         ActiveSelect();
         Manager.CommunityExit();
+    }
+
+    public void ActiveRead(int id)
+    {
+        transaction.GetOne(id);
+    }
+
+    public void ActiveRead2()
+    {
+        ActiveFalse();
+        ReadPanel.SetActive(true);
+    }
+
+    public void PostSubmit()
+    {
+        transaction.PostOne();
+        ActiveCommu();
     }
 }
