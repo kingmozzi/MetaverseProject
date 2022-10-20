@@ -33,6 +33,8 @@ public class ButtonManager3 : MonoBehaviour
     public GameObject prefab;
     public LikePrefab getVariable;
 
+    public RectTransform SpawnPostion;
+
     string companyName;
     int detailIndex;
     int SpDetailIndex;
@@ -40,11 +42,11 @@ public class ButtonManager3 : MonoBehaviour
     int width = 150;
     int height = 150;
 
-    int x = 190;
-    int y = 355;
+    float x;
+    float y;
 
-    int SpX = 190;
-    int SpY = 355;
+    float SpX;
+    float SpY;
 
     // Start is called before the first frame update
     void Awake()
@@ -54,10 +56,10 @@ public class ButtonManager3 : MonoBehaviour
 
     public void Instants()
     {
-        x=190;
-        y=355;
-        SpX = 190;
-        SpY = 355;
+        x = SpawnPostion.position.x;
+        y = SpawnPostion.position.y;
+        SpX = SpawnPostion.position.x;
+        SpY = SpawnPostion.position.y;
 
         InstantPart();
         InstantService();

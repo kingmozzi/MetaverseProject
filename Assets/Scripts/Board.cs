@@ -10,8 +10,11 @@ public class Board : MonoBehaviour
     public Button RefreshButton;
     public ReadPost readpost;
 
-    int x = 508;
-    int y = 340;
+    public RectTransform SpawnPostion;
+
+
+    float x;
+    float y;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +40,7 @@ public class Board : MonoBehaviour
             tempPrefab.writer.text = tempPost.writer;
             tempPrefab.create_date.text = tempPost.create_date;
             tempPrefab.count.text = tempPost.count.ToString();
-            tempPrefab.recommend.text = tempPost.recommend.ToString();
+            //tempPrefab.recommend.text = tempPost.recommend.ToString();
             Instantiate(PostObject, createPoint, Quaternion.identity, transform);
             y-=30;
         }
@@ -45,8 +48,8 @@ public class Board : MonoBehaviour
 
     public void Refresh()
     {
-        x = 508;
-        y = 340;
+        x = SpawnPostion.position.x;
+        y = SpawnPostion.position.y;
         Transaction.GetList();
     }
 
@@ -55,7 +58,7 @@ public class Board : MonoBehaviour
         var temp = Transaction.curPost;
         readpost.title.text = temp.title;
         readpost.writer.text = temp.writer + " | " + temp.create_date;
-        readpost.count.text = "조회 " + temp.count.ToString() + " | 추천 " + temp.recommend.ToString();
+        readpost.count.text = "조회 " + temp.count.ToString();
         readpost.contents.text = temp.contents;
     }
 

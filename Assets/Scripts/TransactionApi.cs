@@ -54,6 +54,11 @@ public class TransactionApi : MonoBehaviour
 
     public ButtonManager4 btnManager4;
 
+    public InputField putTitle;
+    public InputField putWriter;
+    public InputField putPw;
+    public InputField putContents;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,25 +82,37 @@ public class TransactionApi : MonoBehaviour
     public void PostOne()
     {
         StartCoroutine(DataPost());
-        GetList();
+    }
+
+    public void UpdateOne()
+    {
+        StartCoroutine(DataUpdate(curPost.id));
+    }
+
+    public void DeleteOne()
+    {
+        StartCoroutine(DataDelete(curPost.id));
     }
 
     IEnumerator DataGet()
     {
         string url = "http://127.0.0.1:8000/board";
 
-        UnityWebRequest www = UnityWebRequest.Get(url);
+        using(UnityWebRequest www = UnityWebRequest.Get(url))
+        {
+            yield return www.SendWebRequest();
 
-        yield return www.SendWebRequest();
+            if (www.result != UnityWebRequest.Result.Success) {
+                Debug.Log(www.error);
+            }
+            else {
+                //Debug.Log(www.downloadHandler.text);
+                PostList = JsonHelper.FromJson<Post>("{\"data\":"+www.downloadHandler.text+"}");
+                boardScript.BoardPrint();           
+            }
+        }
 
-        if (www.result != UnityWebRequest.Result.Success) {
-            Debug.Log(www.error);
-        }
-        else {
-            //Debug.Log(www.downloadHandler.text);
-            PostList = JsonHelper.FromJson<Post>("{\"data\":"+www.downloadHandler.text+"}");
-            boardScript.BoardPrint();           
-        }
+        
     }
 
     IEnumerator DataPost()
@@ -111,20 +128,22 @@ public class TransactionApi : MonoBehaviour
         postContents.text="";
         string form = "{\"title\": \""+title+"\",\"writer\": \""+writer+"\",\"password\": \""+pw+"\",\"contents\": \""+contents+"\"}";
         byte[] databyte = Encoding.UTF8.GetBytes(form);
-        UnityWebRequest _request = new UnityWebRequest(url,UnityWebRequest.kHttpVerbPOST);
-        _request.uploadHandler = new UploadHandlerRaw(databyte);
-        _request.downloadHandler = new DownloadHandlerBuffer();
-        _request.SetRequestHeader("Content-Type", "application/json;charset=utf-8");
-        yield return _request.SendWebRequest();
-        //Debug.Log(_request.responseCode);
-        
-        if (_request.error != null)
+        using(UnityWebRequest _request = new UnityWebRequest(url,UnityWebRequest.kHttpVerbPOST))
         {
-            Debug.LogError(_request.error);
-        }
-        else
-        {
-            //Debug.Log(_request.downloadHandler.text);
+            _request.uploadHandler = new UploadHandlerRaw(databyte);
+            _request.downloadHandler = new DownloadHandlerBuffer();
+            _request.SetRequestHeader("Content-Type", "application/json;charset=utf-8");
+            yield return _request.SendWebRequest();
+            //Debug.Log(_request.responseCode);
+            
+            if (_request.error != null)
+            {
+                Debug.LogError(_request.error);
+            }
+            else
+            {
+                //Debug.Log(_request.downloadHandler.text);
+            }
         }
     }
 
@@ -132,45 +151,81 @@ public class TransactionApi : MonoBehaviour
     {
         string url = "http://127.0.0.1:8000/board/" + index.ToString();
 
-        UnityWebRequest www = UnityWebRequest.Get(url);
+        using(UnityWebRequest www = UnityWebRequest.Get(url))
+        {
+            yield return www.SendWebRequest();
 
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success) {
-            Debug.Log(www.error);
-        }
-        else {
-            // Show results as text
-            Post temp = JsonUtility.FromJson<Post>(www.downloadHandler.text);
-            curPost = temp;
-            boardScript.PostPrint();
-            btnManager4.ActiveRead2();
+            if (www.result != UnityWebRequest.Result.Success) {
+                Debug.Log(www.error);
+            }
+            else {
+                // Show results as text
+                Post temp = JsonUtility.FromJson<Post>(www.downloadHandler.text);
+                temp.count+=1;
+                curPost = temp;
+                boardScript.PostPrint();
+                btnManager4.ActiveRead2();
+                putTitle.text = temp.title;
+                putWriter.text = temp.writer;
+                putPw.text = temp.password;
+                putContents.text = temp.contents;
+                
+                StartCoroutine(CountUp(url, temp.count));
+            }
         }
     }
+
+    IEnumerator CountUp(string url, int count)
+    {
+        string form = "{\"count\": \"" +count.ToString()+"\"}";
+        byte[] databyte = Encoding.UTF8.GetBytes(form);
+        using(UnityWebRequest _request = new UnityWebRequest(url,UnityWebRequest.kHttpVerbPUT))
+        {
+            _request.uploadHandler = new UploadHandlerRaw(databyte);
+            _request.downloadHandler = new DownloadHandlerBuffer();
+            _request.SetRequestHeader("Content-Type", "application/json;charset=utf-8");
+            yield return _request.SendWebRequest();
+            //Debug.Log(_request.responseCode);
+            
+            if (_request.error != null)
+            {
+                Debug.LogError(_request.error);
+            }
+            else
+            {
+                //Debug.Log(_request.downloadHandler.text);
+            }
+        }  
+    }
+
+
 
     IEnumerator DataUpdate(int index)
     {
         string url = "http://127.0.0.1:8000/board/" + index.ToString();
 
-        string title = "반갑뜹니다";
-        string writer = "야디록";
-        string contents = "웟";
-        string form = "{\"title\": \""+title+"\",\"writer\": \""+writer+"\",\"contents\": \""+contents+"\"}";
+        string title = putTitle.text;
+        string writer = putWriter.text;
+        string pw = putPw.text;
+        string contents = putContents.text;
+        string form = "{\"title\": \""+title+"\",\"writer\": \""+writer+"\",\"password\": \""+pw+"\",\"contents\": \""+contents+"\"}";
         byte[] databyte = Encoding.UTF8.GetBytes(form);
-        UnityWebRequest _request = new UnityWebRequest(url,UnityWebRequest.kHttpVerbPUT);
-        _request.uploadHandler = new UploadHandlerRaw(databyte);
-        _request.downloadHandler = new DownloadHandlerBuffer();
-        _request.SetRequestHeader("Content-Type", "application/json;charset=utf-8");
-        yield return _request.SendWebRequest();
-        Debug.Log(_request.responseCode);
-        
-        if (_request.error != null)
+        using(UnityWebRequest _request = new UnityWebRequest(url,UnityWebRequest.kHttpVerbPUT))
         {
-            Debug.LogError(_request.error);
-        }
-        else
-        {
-            Debug.Log(_request.downloadHandler.text);
+            _request.uploadHandler = new UploadHandlerRaw(databyte);
+            _request.downloadHandler = new DownloadHandlerBuffer();
+            _request.SetRequestHeader("Content-Type", "application/json;charset=utf-8");
+            yield return _request.SendWebRequest();
+            //Debug.Log(_request.responseCode);
+            
+            if (_request.error != null)
+            {
+                Debug.LogError(_request.error);
+            }
+            else
+            {
+                //Debug.Log(_request.downloadHandler.text);
+            }
         }
     }
 
@@ -178,15 +233,16 @@ public class TransactionApi : MonoBehaviour
     {
         string url = "http://127.0.0.1:8000/board/" + index.ToString();
 
-        UnityWebRequest www = UnityWebRequest.Delete(url);
+        using(UnityWebRequest www = UnityWebRequest.Delete(url))
+        {
+            yield return www.SendWebRequest();
 
-        yield return www.SendWebRequest();
-
-        if (www.result != UnityWebRequest.Result.Success) {
-            Debug.Log(www.error);
-        }
-        else {
-            Debug.Log(www.responseCode);
+            if (www.result != UnityWebRequest.Result.Success) {
+                Debug.Log(www.error);
+            }
+            else {
+                //Debug.Log(www.responseCode);
+            }
         }
     }
 

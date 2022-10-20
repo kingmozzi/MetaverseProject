@@ -31,8 +31,12 @@ public class ButtonManager2 : MonoBehaviour
     public Text SpDetail;
     public Toggle SpIsLike;
 
+    public RectTransform SpawnPostion;
+
     public GameObject prefab;
     public ItemPrefab getVariable;
+
+    
 
     string companyName;
     int detailIndex;
@@ -41,15 +45,19 @@ public class ButtonManager2 : MonoBehaviour
     int width = 150;
     int height = 150;
 
-    int x = 190;
-    int y = 355;
+    float x;
+    float y;
 
-    int SpX = 190;
-    int SpY = 355;
+    float SpX;
+    float SpY;
 
     // Start is called before the first frame update
     void Awake()
     {  
+        x = SpawnPostion.position.x;
+        y = SpawnPostion.position.y;
+        SpX = SpawnPostion.position.x;
+        SpY = SpawnPostion.position.y;
         InstantPart();
         InstantService();
         InstantSpecial();

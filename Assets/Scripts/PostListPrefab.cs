@@ -11,7 +11,6 @@ public class PostListPrefab : MonoBehaviour
     public Text writer;
     public Text create_date;
     public Text count;
-    public Text recommend;
 
     Board board;
     ButtonManager4 btnManager4;

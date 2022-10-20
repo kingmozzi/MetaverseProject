@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonManager4 : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class ButtonManager4 : MonoBehaviour
     public GameObject CreatePanel;
     public GameObject ReadPanel;
     public TransactionApi transaction;
+    public GameObject UpdatePwPanel;
+    public GameObject DeletePwPanel;
+    public GameObject UpdatePanel;
+    public InputField UpdatePw;
+    public InputField DeletePw;
+    public GameObject PwCheckPopup;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +38,9 @@ public class ButtonManager4 : MonoBehaviour
         CommuPanel.SetActive(false);
         CreatePanel.SetActive(false);
         ReadPanel.SetActive(false);
+        UpdatePwPanel.SetActive(false);
+        DeletePwPanel.SetActive(false);
+        UpdatePanel.SetActive(false);
     }
 
     public void ActiveSelect()
@@ -77,6 +87,55 @@ public class ButtonManager4 : MonoBehaviour
     public void PostSubmit()
     {
         transaction.PostOne();
+        ActiveCommu();
+    }
+
+    public void ActiveUpdate()
+    {
+        if(UpdatePw.text == transaction.curPost.password)
+        {
+            ActiveFalse();
+            UpdatePanel.SetActive(true);
+        }
+        else
+        {
+            PwCheckPopup.SetActive(true);
+        }
+    }
+
+    public void ActiveDelete()
+    {
+        if(DeletePw.text == transaction.curPost.password)
+        {
+            transaction.DeleteOne();
+            ActiveCommu();
+        }
+        else
+        {
+            PwCheckPopup.SetActive(true);
+        }
+    }
+
+    public void ActiveUpdatePw()
+    {
+        ActiveFalse();
+        UpdatePwPanel.SetActive(true);
+    }
+
+    public void ActiveDeletePw()
+    {
+        ActiveFalse();
+        DeletePwPanel.SetActive(true);
+    }
+
+    public void PwCheckPopupExit()
+    {
+        PwCheckPopup.SetActive(false);
+    }
+
+    public void UpdateSubmit()
+    {
+        transaction.UpdateOne();
         ActiveCommu();
     }
 }
