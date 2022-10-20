@@ -59,6 +59,8 @@ public class TransactionApi : MonoBehaviour
     public InputField putPw;
     public InputField putContents;
 
+    public int page;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +69,7 @@ public class TransactionApi : MonoBehaviour
         //StartCoroutine(DataGetOne(1));
         //StartCoroutine(DataUpdate(7));
         //StartCoroutine(DataDelete(4));
+        page = 1;
     }
 
     public void GetList()
@@ -96,7 +99,7 @@ public class TransactionApi : MonoBehaviour
 
     IEnumerator DataGet()
     {
-        string url = "http://127.0.0.1:8000/board";
+        string url = "http://127.0.0.1:8000/board?page="+page.ToString();
 
         using(UnityWebRequest www = UnityWebRequest.Get(url))
         {

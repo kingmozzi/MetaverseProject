@@ -8,6 +8,8 @@ public class Board : MonoBehaviour
     public GameObject PostObject;
     public TransactionApi Transaction;
     public Button RefreshButton;
+    public Button NextButton;
+    public Button BeforeButton;
     public ReadPost readpost;
 
     public RectTransform SpawnPostion;
@@ -60,6 +62,21 @@ public class Board : MonoBehaviour
         readpost.writer.text = temp.writer + " | " + temp.create_date;
         readpost.count.text = "조회 " + temp.count.ToString();
         readpost.contents.text = temp.contents;
+    }
+
+    public void BeforePage()
+    {
+        if(Transaction.page > 1)
+        {
+            Transaction.page-=1;
+        }
+        Refresh();
+    }
+
+    public void NextPage()
+    {
+        Transaction.page+=1;
+        Refresh();
     }
 
 

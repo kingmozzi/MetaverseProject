@@ -26,6 +26,8 @@ public class PostListPrefab : MonoBehaviour
     void Update()
     {
         board.RefreshButton.onClick.AddListener(delegate{DeleteSelf();});
+        board.BeforeButton.onClick.AddListener(delegate{DeleteSelf();});
+        board.NextButton.onClick.AddListener(delegate{DeleteSelf();});
     }
 
     void DeleteSelf()

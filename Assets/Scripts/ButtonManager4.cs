@@ -58,6 +58,7 @@ public class ButtonManager4 : MonoBehaviour
     public void ActiveCommu()
     {
         ActiveFalse();
+        transaction.page =1;
         CommuPanel.SetActive(true);
     }
 
