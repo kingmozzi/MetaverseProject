@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public List<SpecialItem> SpItems;
     public List<SpecialItem> SpCart;
 
-    bool isInfo;
+    public bool isInfo;
 
     RaycastHit hit;
 

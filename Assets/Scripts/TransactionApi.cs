@@ -99,7 +99,7 @@ public class TransactionApi : MonoBehaviour
 
     IEnumerator DataGet()
     {
-        string url = "http://127.0.0.1:8000/board?page="+page.ToString();
+        string url = "https://metaverseapiserver.herokuapp.com/board?page="+page.ToString();
 
         using(UnityWebRequest www = UnityWebRequest.Get(url))
         {
@@ -120,7 +120,7 @@ public class TransactionApi : MonoBehaviour
 
     IEnumerator DataPost()
     {
-        string url = "http://127.0.0.1:8000/board";
+        string url = "https://metaverseapiserver.herokuapp.com/board";
         string title = postTitle.text;
         postTitle.text="";
         string writer = postWriter.text;
@@ -152,7 +152,7 @@ public class TransactionApi : MonoBehaviour
 
     IEnumerator DataGetOne(int index)
     {
-        string url = "http://127.0.0.1:8000/board/" + index.ToString();
+        string url = "https://metaverseapiserver.herokuapp.com/board/" + index.ToString();
 
         using(UnityWebRequest www = UnityWebRequest.Get(url))
         {
@@ -205,7 +205,7 @@ public class TransactionApi : MonoBehaviour
 
     IEnumerator DataUpdate(int index)
     {
-        string url = "http://127.0.0.1:8000/board/" + index.ToString();
+        string url = "https://metaverseapiserver.herokuapp.com/board/" + index.ToString();
 
         string title = putTitle.text;
         string writer = putWriter.text;
@@ -234,7 +234,7 @@ public class TransactionApi : MonoBehaviour
 
     IEnumerator DataDelete(int index)
     {
-        string url = "http://127.0.0.1:8000/board/" + index.ToString();
+        string url = "https://metaverseapiserver.herokuapp.com/board/" + index.ToString();
 
         using(UnityWebRequest www = UnityWebRequest.Delete(url))
         {

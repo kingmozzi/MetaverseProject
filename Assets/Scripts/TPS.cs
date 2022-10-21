@@ -8,6 +8,7 @@ public class TPS : MonoBehaviour
     public Transform cameraArm;
     public float speed;
     public float sensitivity;
+    public GameManager Manager;
 
     float hAxis;
     float vAxis;
@@ -55,6 +56,10 @@ public class TPS : MonoBehaviour
 
     void Move()
     {
+        if(Manager.isInfo)
+        {
+            return;
+        }
         moveVec = new Vector2(hAxis, vAxis);
         anim.SetBool("isRun", moveVec != Vector3.zero);
         anim.SetBool("isWalk", wDown);
@@ -98,7 +103,7 @@ public class TPS : MonoBehaviour
 
     void Jump()
     {
-        if(jDown && !isJump)
+        if(jDown && !isJump && !Manager.isInfo)
         {
             rigid.AddForce(Vector3.up * 10, ForceMode.Impulse);
             anim.SetBool("isJump", true);

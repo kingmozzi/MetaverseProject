@@ -6839,6 +6839,7 @@ MonoBehaviour:
   cameraArm: {fileID: 1178671281}
   speed: 20
   sensitivity: 5
+  Manager: {fileID: 1124988335}
 --- !u!1 &374954865
 GameObject:
   m_ObjectHideFlags: 0
@@ -17870,6 +17871,7 @@ MonoBehaviour:
   VideoModeNpc: {fileID: 1980389333}
   VideoModeCamera: {fileID: 291035549}
   getCamera: {fileID: 963194227}
+  isInfo: 0
   itemLength: 3
   suspension: {fileID: 21300000, guid: 41a62384e4ef9a64d90a497e3cf2553b, type: 3}
   ServiceItemLength: 0
