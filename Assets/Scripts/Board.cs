@@ -18,18 +18,17 @@ public class Board : MonoBehaviour
     float x;
     float y;
 
-    // Start is called before the first frame update
     void Start()
     {
         Refresh();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
+    //Board에 받아온 게시글들을 표시
     public void BoardPrint()
     {
         for(int i=0;i<Transaction.PostList.Length;i++)
@@ -48,6 +47,7 @@ public class Board : MonoBehaviour
         }
     }
 
+    //새로고침 - x,y 좌표 초기화 시킨 후 새로 생성
     public void Refresh()
     {
         x = SpawnPostion.position.x;
@@ -55,6 +55,7 @@ public class Board : MonoBehaviour
         Transaction.GetList();
     }
 
+    //게시글 내용 출력 - 제목, 글쓴이, 날짜, 조회수, 내용
     public void PostPrint()
     {
         var temp = Transaction.curPost;
@@ -64,6 +65,7 @@ public class Board : MonoBehaviour
         readpost.contents.text = temp.contents;
     }
 
+    //이전 페이지
     public void BeforePage()
     {
         if(Transaction.page > 1)
@@ -73,6 +75,7 @@ public class Board : MonoBehaviour
         Refresh();
     }
 
+    //다음 페이지
     public void NextPage()
     {
         Transaction.page+=1;

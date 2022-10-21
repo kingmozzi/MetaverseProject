@@ -35,19 +35,17 @@ public class GameManager : MonoBehaviour
         SpCart = new List<SpecialItem>();
     }
 
-
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckNPC();
     }
 
+    //NPC상호작용, 마우스 클릭한 NPC가 상호작용 가능한 NPC라면 그에 맞는 패널 활성화
     void CheckNPC()
     {
         if(Input.GetMouseButtonDown(0))
@@ -81,6 +79,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    //회사 정보 npc 클릭 -> 회사 정보 패널 활성화
     void InfoNpcClicked()
     {
         if(!isInfo)
@@ -90,12 +89,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //회사 정보 패널 비활성화
     public void CompanyInfoExit()
     {
         CompanyInfo.SetActive(false);
         isInfo=false;
     }
 
+    //서비스(부품, 서비스, 특장종류) 정보 패널 활성화
     void ServiceInfoNpcClicked()
     {
         if(!isInfo)
@@ -105,12 +106,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //서비스(부품, 서비스, 특장종류) 정보 패널 비활성화
     public void ServiceInfoExit()
     {   
         ServiceInfo.SetActive(false);
         isInfo=false;
     }
 
+    //좋아요 리스트 패널 활성화
     public void LikeInfoNpcClicked()
     {
         if(!isInfo)
@@ -120,12 +123,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //좋아요 리스트 패널 비활성화
     public void LikeInfoExit()
     {
         LikeInfo.SetActive(false);
         isInfo = false;
     }
 
+    //게시판 활성화
     public void CommunityNpcClicked()
     {
         if(!isInfo)
@@ -135,12 +140,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //게시판 비활성화
     public void CommunityExit()
     {
         Community.SetActive(false);
         isInfo = false;
     }
 
+    //비디오 모드 활성화
     void VideoModeNpcClicked()
     {
         if(!isInfo)
@@ -152,6 +159,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //비디오 모드 비활성화
     public void VideoModeExit()
     {
         VideoMode.SetActive(false);
@@ -160,11 +168,13 @@ public class GameManager : MonoBehaviour
         Player.SetActive(true);
     }
 
+    //좋아요 누른 제품을 카트에 추가함
     public void addCart(int index)
     {
         items[index].isLike = true;
         cart.Add(items[index]);
     }
+    //좋아요 취소한 제품을 카트에서 뺌
     public void deleteCart(int index)
     {
         items[index].isLike = false;

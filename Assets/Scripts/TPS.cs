@@ -58,6 +58,8 @@ public class TPS : MonoBehaviour
     {
         if(Manager.isInfo)
         {
+            anim.SetBool("isRun", false);
+            anim.SetBool("isWalk", false);
             return;
         }
         moveVec = new Vector2(hAxis, vAxis);
