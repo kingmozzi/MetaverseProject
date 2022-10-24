@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public List<Item> cart;
     public List<SpecialItem> SpItems;
     public List<SpecialItem> SpCart;
+    public List<RectTransform> SpawnPositions;
+    public List<RectTransform> PostSpawnPositions;
 
     public bool isInfo;
 

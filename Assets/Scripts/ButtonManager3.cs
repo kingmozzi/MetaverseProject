@@ -33,22 +33,10 @@ public class ButtonManager3 : MonoBehaviour
     public GameObject prefab;
     public LikePrefab getVariable;
 
-    public RectTransform SpawnPostion;
-
     string companyName;
     int detailIndex;
     int SpDetailIndex;
 
-    int width = 150;
-    int height = 150;
-
-    float x;
-    float y;
-
-    float SpX;
-    float SpY;
-
-    // Start is called before the first frame update
     void Awake()
     {  
        Instants();
@@ -56,11 +44,6 @@ public class ButtonManager3 : MonoBehaviour
 
     public void Instants()
     {
-        x = SpawnPostion.position.x;
-        y = SpawnPostion.position.y;
-        SpX = SpawnPostion.position.x;
-        SpY = SpawnPostion.position.y;
-
         InstantPart();
         InstantService();
         InstantSpecial();
@@ -79,7 +62,7 @@ public class ButtonManager3 : MonoBehaviour
             Item temp = Manager.cart[i];
             
             getVariable = prefab.GetComponent<LikePrefab>();
-            Vector2 createPoint = new Vector2(x, y);
+            Vector2 createPoint = Manager.SpawnPositions[i].position;
             getVariable.itemImage.sprite = temp.image;
             getVariable.nameText.text = temp.name;
             getVariable.index = i;
@@ -101,12 +84,6 @@ public class ButtonManager3 : MonoBehaviour
             }
             
             Instantiate(prefab, createPoint, Quaternion.identity, PartPanel.transform);
-
-            x+=width;
-            if((i+1)%5==0)
-            {
-                y-=height;
-            }
         }
     }
 
@@ -133,7 +110,7 @@ public class ButtonManager3 : MonoBehaviour
             SpecialItem temp = Manager.SpCart[i];
 
             getVariable = prefab.GetComponent<LikePrefab>();
-            Vector2 createPoint = new Vector2(SpX, SpY);
+            Vector2 createPoint = Manager.SpawnPositions[i].position;
             getVariable.itemBacground.color = new Color(124/255f, 126/255f, 125/255f);
             getVariable.nameText.text = temp.name;
             getVariable.itemImage.sprite = temp.image;
@@ -142,13 +119,6 @@ public class ButtonManager3 : MonoBehaviour
 
 
             Instantiate(prefab, createPoint, Quaternion.identity, SpecialPanel.transform);
-
-
-            SpX+=width;
-            if((i+1)%5==0)
-            {
-                SpY-=height;
-            }
         }
     }
 

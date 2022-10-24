@@ -11,12 +11,7 @@ public class Board : MonoBehaviour
     public Button NextButton;
     public Button BeforeButton;
     public ReadPost readpost;
-
-    public RectTransform SpawnPostion;
-
-
-    float x;
-    float y;
+    public GameManager Manager;
 
     void Start()
     {
@@ -35,7 +30,7 @@ public class Board : MonoBehaviour
         {
             var tempPost = Transaction.PostList[i];
             PostListPrefab tempPrefab = PostObject.GetComponent<PostListPrefab>(); 
-            Vector2 createPoint = new Vector2(x,y);
+            Vector2 createPoint = Manager.PostSpawnPositions[i].position;
             tempPrefab.id.text = tempPost.id.ToString();
             tempPrefab.title.text = tempPost.title;
             tempPrefab.writer.text = tempPost.writer;
@@ -43,15 +38,12 @@ public class Board : MonoBehaviour
             tempPrefab.count.text = tempPost.count.ToString();
             //tempPrefab.recommend.text = tempPost.recommend.ToString();
             Instantiate(PostObject, createPoint, Quaternion.identity, transform);
-            y-=30;
         }
     }
 
     //새로고침 - x,y 좌표 초기화 시킨 후 새로 생성
     public void Refresh()
     {
-        x = SpawnPostion.position.x;
-        y = SpawnPostion.position.y;
         Transaction.GetList();
     }
 
