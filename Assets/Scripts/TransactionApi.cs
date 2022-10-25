@@ -64,11 +64,6 @@ public class TransactionApi : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(DataPost());
-        //StartCoroutine(DataGet());
-        //StartCoroutine(DataGetOne(1));
-        //StartCoroutine(DataUpdate(7));
-        //StartCoroutine(DataDelete(4));
         page = 1;
     }
 
@@ -111,7 +106,8 @@ public class TransactionApi : MonoBehaviour
             else {
                 //Debug.Log(www.downloadHandler.text);
                 PostList = JsonHelper.FromJson<Post>("{\"data\":"+www.downloadHandler.text+"}");
-                boardScript.BoardPrint();           
+                boardScript.BoardPrint();
+                boardScript.pageCheck();         
             }
         }
 

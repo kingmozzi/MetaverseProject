@@ -13,6 +13,11 @@ public class Board : MonoBehaviour
     public ReadPost readpost;
     public GameManager Manager;
 
+    int beforeLastId;
+    int afterLastId;
+    int lastIndex;
+
+
     void Start()
     {
         Refresh();
@@ -26,6 +31,8 @@ public class Board : MonoBehaviour
     //Board에 받아온 게시글들을 표시
     public void BoardPrint()
     {
+        beforeLastId = afterLastId;
+    
         for(int i=0;i<Transaction.PostList.Length;i++)
         {
             var tempPost = Transaction.PostList[i];
@@ -38,6 +45,8 @@ public class Board : MonoBehaviour
             tempPrefab.count.text = tempPost.count.ToString();
             //tempPrefab.recommend.text = tempPost.recommend.ToString();
             Instantiate(PostObject, createPoint, Quaternion.identity, transform);
+            afterLastId = tempPost.id;
+            lastIndex = i;
         }
     }
 
@@ -70,8 +79,19 @@ public class Board : MonoBehaviour
     //다음 페이지
     public void NextPage()
     {
-        Transaction.page+=1;
+        if(lastIndex >=7)
+        {
+            Transaction.page+=1;
+        }
         Refresh();
+    }
+
+    public void pageCheck()
+    {
+        if(beforeLastId == afterLastId && Transaction.page > 1 && lastIndex >=7)
+        {
+            Transaction.page-=1;
+        }
     }
 
 
