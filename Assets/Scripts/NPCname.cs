@@ -5,13 +5,13 @@ using UnityEngine;
 public class NPCname : MonoBehaviour
 {
     public Camera Cam;
-    // Start is called before the first frame update
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    //NPC이름과 역할 UI을 항상 플레이어(카메라)를 바라보도록 설정함
     void Update()
     {
         transform.LookAt(Cam.transform);

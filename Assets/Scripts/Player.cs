@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
         
     }
     
+    //Floor tag와 충돌시 착지
     void OnCollisionEnter(Collision other) 
     {
         if(other.gameObject.tag == "Floor")

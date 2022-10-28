@@ -16,7 +16,7 @@ public class ItemPrefab : MonoBehaviour
         btnManager2 = GameObject.Find("Canvas").transform.Find("ServiceInfo").GetComponent<ButtonManager2>();
     }
 
-
+    //아이템 프리팹 클릭 시, 상세정보 활성화
     public void Onclick()
     {   
         if(index!=-1){

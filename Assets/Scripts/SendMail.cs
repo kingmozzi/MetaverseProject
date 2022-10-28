@@ -31,6 +31,7 @@ public class SendMail : MonoBehaviour
         
     }
 
+    //메일 전송하기
     public void SendEMail()
     {
         message = new System.Net.Mail.MailMessage();

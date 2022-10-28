@@ -13,19 +13,18 @@ public class ButtonManager : MonoBehaviour
 
     private string companyName;
 
-    // Start is called before the first frame update
     void Start()
     {
         companyName = InfoKindText.text;
         InfoKindText.text += "/소개";
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
+    //모든패널 끄기
     void ActiveFalse()
     {
         InfoPanel.SetActive(false);
@@ -34,6 +33,7 @@ public class ButtonManager : MonoBehaviour
         InfoKindText.text = companyName;
     }
 
+    //모든패널 끄고 소개패널 활성화.
     public void ActiveInfo()
     {
         ActiveFalse();
@@ -41,6 +41,7 @@ public class ButtonManager : MonoBehaviour
         InfoKindText.text += "/소개";
     }
 
+    //모든패널 끄고 위치패널 활성화.
     public void ActiveLocation()
     {
         ActiveFalse();
@@ -48,6 +49,7 @@ public class ButtonManager : MonoBehaviour
         InfoKindText.text += "/위치";
     }
 
+    //모든패널 끄고 연혁패널 활성화.
     public void ActiveHistory()
     {
         ActiveFalse();
@@ -55,6 +57,7 @@ public class ButtonManager : MonoBehaviour
         InfoKindText.text += "/연혁";
     }
 
+    //회사정보창 끄기
     public void CompanyInfoExit()
     {
         Manager.CompanyInfoExit();

@@ -43,6 +43,7 @@ public class TPS : MonoBehaviour
         Jump();
     }
 
+    //Input 관리
     void GetInput()
     {
         mouseX = Input.GetAxis("Mouse X");
@@ -54,6 +55,7 @@ public class TPS : MonoBehaviour
         fDown = Input.GetButton("Fire2");
     }
 
+    //이동
     void Move()
     {
         if(Manager.isInfo)
@@ -81,6 +83,7 @@ public class TPS : MonoBehaviour
         }
     }
 
+    //마우스 오른쪽 버튼을 눌렀을 때 카메라 회전할 수 있게하는 함수
     void LookAround()
     {
         if(!fDown)
@@ -103,6 +106,7 @@ public class TPS : MonoBehaviour
         cameraArm.rotation = Quaternion.Euler(x, camAngle.y + mouseDelta.x*sensitivity, camAngle.z);
     }
 
+    //점프
     void Jump()
     {
         if(jDown && !isJump && !Manager.isInfo)
@@ -119,32 +123,23 @@ public class TPS : MonoBehaviour
         FreezeRotation();
     }
 
+    //벽이 앞에 있으면 앞으로 더 이동할 수 없게함
     void StopToWall()
     {
         isBorder=Physics.Raycast(charterBody.position, charterBody.forward, 5, LayerMask.GetMask("Wall"));
     }
 
+    //충돌로 인해 움직임이 발생시, 돌아가지 않도록 축을 잡아줌.
     void FreezeRotation()
     {
         rigid.angularVelocity = Vector3.zero;
     }
 
+    //착지, 착지했을때 다시 점프할 수 있음.
     public void Land()
     {
         anim.SetBool("isJump", false);
         isJump =false;
     }
-
-    void OnCollisionEnter(Collision other) 
-    {
-        if(other.gameObject.tag == "Floor")
-        {
-            anim.SetBool("isJump", false);
-            isJump =false;
-        }
-    }
-
-
-
     
 }

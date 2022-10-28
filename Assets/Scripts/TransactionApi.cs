@@ -21,6 +21,7 @@ public class TransactionApi : MonoBehaviour
         public string contents;
     }
 
+    //Json형식을 파싱해줌
     public static class JsonHelper 
     {
         public static T[] FromJson<T>(string json)
@@ -67,31 +68,37 @@ public class TransactionApi : MonoBehaviour
         page = 1;
     }
 
+    //게시글 리스트 불러오기, 게시글을 8개씩 불러옴
     public void GetList()
     {
         StartCoroutine(DataGet());
     }
 
+    //READ
     public void GetOne(int index)
     {
         StartCoroutine(DataGetOne(index));
     }
 
+    //CREATE
     public void PostOne()
     {
         StartCoroutine(DataPost());
     }
 
+    //UPDATE
     public void UpdateOne()
     {
         StartCoroutine(DataUpdate(curPost.id));
     }
 
+    //DELETE
     public void DeleteOne()
     {
         StartCoroutine(DataDelete(curPost.id));
     }
 
+    //게시글 리스트 불러오기, 게시글을 8개씩 불러옴
     IEnumerator DataGet()
     {
         string url = "https://metaverseapiserver.herokuapp.com/board?page="+page.ToString();
@@ -110,10 +117,9 @@ public class TransactionApi : MonoBehaviour
                 boardScript.pageCheck();         
             }
         }
-
-        
     }
 
+    //CREATE
     IEnumerator DataPost()
     {
         string url = "https://metaverseapiserver.herokuapp.com/board";
@@ -146,6 +152,7 @@ public class TransactionApi : MonoBehaviour
         }
     }
 
+    //READ
     IEnumerator DataGetOne(int index)
     {
         string url = "https://metaverseapiserver.herokuapp.com/board/" + index.ToString();
@@ -174,6 +181,7 @@ public class TransactionApi : MonoBehaviour
         }
     }
 
+    //조회수 하나 올려줌.
     IEnumerator CountUp(string url, int count)
     {
         string form = "{\"count\": \"" +count.ToString()+"\"}";
@@ -197,8 +205,7 @@ public class TransactionApi : MonoBehaviour
         }  
     }
 
-
-
+    //UPDATE
     IEnumerator DataUpdate(int index)
     {
         string url = "https://metaverseapiserver.herokuapp.com/board/" + index.ToString();
@@ -228,6 +235,7 @@ public class TransactionApi : MonoBehaviour
         }
     }
 
+    //DELETE
     IEnumerator DataDelete(int index)
     {
         string url = "https://metaverseapiserver.herokuapp.com/board/" + index.ToString();
@@ -245,9 +253,6 @@ public class TransactionApi : MonoBehaviour
         }
     }
 
-    
-
-    // Update is called once per frame
     void Update()
     {
         

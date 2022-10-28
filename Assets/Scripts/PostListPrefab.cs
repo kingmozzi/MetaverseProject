@@ -15,14 +15,13 @@ public class PostListPrefab : MonoBehaviour
     Board board;
     ButtonManager4 btnManager4;
 
-    // Start is called before the first frame update
     void Start()
     {
         btnManager4 = GameObject.Find("Canvas").transform.Find("Community").GetComponent<ButtonManager4>();
         board = GameObject.Find("Canvas").transform.Find("Community").transform.Find("CommuPanel").transform.Find("BoardPanel").GetComponent<Board>();
     }
 
-    // Update is called once per frame
+    //새로고침 할 경우, 리스트를 새로 업데이트해야 하므로 본인 삭제
     void Update()
     {
         board.RefreshButton.onClick.AddListener(delegate{DeleteSelf();});
@@ -35,6 +34,7 @@ public class PostListPrefab : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    //포스트 프리팹 클릭 시, 게시글 상세 내용화면 활성화
     public void OnClick()
     {
         btnManager4.ActiveRead(Int32.Parse(id.text));

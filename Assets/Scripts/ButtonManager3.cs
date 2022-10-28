@@ -42,6 +42,7 @@ public class ButtonManager3 : MonoBehaviour
        Instants();
     }
 
+    //좋아요 리스트에 있는 것들을 인스턴스화
     public void Instants()
     {
         InstantPart();
@@ -49,6 +50,7 @@ public class ButtonManager3 : MonoBehaviour
         InstantSpecial();
     }
 
+    //부품 인스턴스화
     void InstantPart()
     {
         PartNull.SetActive(false);
@@ -87,6 +89,7 @@ public class ButtonManager3 : MonoBehaviour
         }
     }
 
+    //서비스 인스턴스화
     void InstantService()
     {
         ServiceNull.SetActive(false);
@@ -97,6 +100,7 @@ public class ButtonManager3 : MonoBehaviour
         }
     }
 
+    //특장 인스턴스화
     void InstantSpecial()
     {
         SpecialNull.SetActive(false);
@@ -122,7 +126,6 @@ public class ButtonManager3 : MonoBehaviour
         }
     }
 
-
     void Start()
     {
         companyName = InfoKindText.text;
@@ -135,6 +138,7 @@ public class ButtonManager3 : MonoBehaviour
 
     }
 
+    //모든패널 끄기
     void ActiveFalse()
     {
         PartPanel.SetActive(false);
@@ -146,6 +150,7 @@ public class ButtonManager3 : MonoBehaviour
         InfoKindText.text = companyName;
     }
 
+    //모든 패널 끄고 부품패널 활성화
     public void ActivePart()
     {
         ActiveFalse();
@@ -153,6 +158,7 @@ public class ButtonManager3 : MonoBehaviour
         InfoKindText.text += "/부품";
     }
 
+    //모든 패널 끄고 서비스패널 활성화
     public void ActiveService()
     {
         ActiveFalse();
@@ -160,6 +166,7 @@ public class ButtonManager3 : MonoBehaviour
         InfoKindText.text += "/서비스";
     }
 
+    //모든 패널 끄고 특장패널 활성화
     public void ActiveSpecial()
     {
         ActiveFalse();
@@ -167,6 +174,7 @@ public class ButtonManager3 : MonoBehaviour
         InfoKindText.text += "/특장";
     }
 
+    //상세정보를 모두 끄고 좋아요 리스트 패널 끄기
     public void LikeInfoExit()
     {
         DetailExit();
@@ -174,6 +182,7 @@ public class ButtonManager3 : MonoBehaviour
         Manager.LikeInfoExit();
     }
 
+    //좋아요 리스트안에 있는 부품의 상세정보 활성화
     public void ActiveDetail(int index)
     {
         Item temp = Manager.cart[index];
@@ -206,6 +215,7 @@ public class ButtonManager3 : MonoBehaviour
         detailIndex = index;
     }
 
+    //상세정보에서 좋아요를 한번 더 누르게되면 삭제, 인스턴스 업데이트
     public void toggleListener()
     {
         if(detailIndex != -1)
@@ -222,12 +232,14 @@ public class ButtonManager3 : MonoBehaviour
         Instants();
     }
 
+    //상세정보 끄기
     public void DetailExit()
     {
         detailIndex=-1;
         DetailPanel.SetActive(false);
     }
 
+    //좋아요 리스트안에 있는 특장의 상세정보 활성화
     public void ActiveSpDetail(int index)
     {
         SpecialItem temp = Manager.SpCart[index];
@@ -242,6 +254,7 @@ public class ButtonManager3 : MonoBehaviour
         SpDetailIndex = index;
     }
 
+    //상세정보에서 좋아요를 한번 더 누르게되면 삭제, 인스턴스 업데이트
     public void SpToggleListener()
     {
         if(SpDetailIndex != -1)
@@ -258,7 +271,7 @@ public class ButtonManager3 : MonoBehaviour
         Instants();
     }
 
-
+    //특장 상세정보 끄기
     public void SpDetailExit()
     {
         SpDetailIndex=-1;

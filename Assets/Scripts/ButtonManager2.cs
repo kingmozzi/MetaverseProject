@@ -45,6 +45,7 @@ public class ButtonManager2 : MonoBehaviour
         InstantSpecial();
     }
 
+    //부품을 인스턴스로 생성, 길이가 0일 경우에는 메세지 출력
     void InstantPart()
     {
         if(Manager.itemLength == 0)
@@ -82,6 +83,7 @@ public class ButtonManager2 : MonoBehaviour
         }
     }
 
+    //서비스를 인스턴스로 생성, 길이가 0일 경우에는 메세지 출력
     void InstantService()
     {
         if(Manager.ServiceItemLength == 0)
@@ -90,6 +92,7 @@ public class ButtonManager2 : MonoBehaviour
         }
     }
 
+    //특장을 인스턴스로 생성, 길이가 0일 경우에는 메세지 출력
     void InstantSpecial()
     {
         if(Manager.SpItemLength == 0)
@@ -113,19 +116,18 @@ public class ButtonManager2 : MonoBehaviour
         }
     }
 
-
     void Start()
     {
         companyName = InfoKindText.text;
         InfoKindText.text += "/부품";
     }
 
-    // Update is called once per frame
     void Update()
     {
 
     }
 
+    //모든패널 끄기
     void ActiveFalse()
     {
         PartPanel.SetActive(false);
@@ -137,6 +139,7 @@ public class ButtonManager2 : MonoBehaviour
         InfoKindText.text = companyName;
     }
 
+    //모든패널을 끄고 부품패널 활성화.
     public void ActivePart()
     {
         ActiveFalse();
@@ -144,6 +147,7 @@ public class ButtonManager2 : MonoBehaviour
         InfoKindText.text += "/부품";
     }
 
+    //모든패널 끄고 서비스패널 활성화.
     public void ActiveService()
     {
         ActiveFalse();
@@ -151,6 +155,8 @@ public class ButtonManager2 : MonoBehaviour
         InfoKindText.text += "/서비스";
     }
 
+
+    //모든패널 끄고 특장패널 활성화.
     public void ActiveSpecial()
     {
         ActiveFalse();
@@ -158,6 +164,7 @@ public class ButtonManager2 : MonoBehaviour
         InfoKindText.text += "/특장";
     }
 
+    //서비스 정보패널 끄기.
     public void ServiceInfoExit()
     {
         DetailExit();
@@ -165,6 +172,7 @@ public class ButtonManager2 : MonoBehaviour
         Manager.ServiceInfoExit();
     }
 
+    //부품 상세정보 활성화.
     public void ActiveDetail(int index)
     {
         Item temp = Manager.items[index];
@@ -197,6 +205,10 @@ public class ButtonManager2 : MonoBehaviour
         detailIndex = index;
     }
 
+    /*
+     * 좋아요 토글 활성, 비활성상태에 따라 카트에 넣고 뺌.
+     * 업데이트된 카트에 맞게 좋아요 리스트 업데이트
+     */
     public void toggleListener()
     {
         if(detailIndex != -1)
@@ -212,12 +224,14 @@ public class ButtonManager2 : MonoBehaviour
         btnManager3.Instants();
     }
 
+    //부품 상세정보 끄기
     public void DetailExit()
     {
         detailIndex=-1;
         DetailPanel.SetActive(false);
     }
 
+    //특장 상세정보 활성화.
     public void ActiveSpDetail(int index)
     {
         SpecialItem temp = Manager.SpItems[index];
@@ -232,6 +246,10 @@ public class ButtonManager2 : MonoBehaviour
         SpDetailIndex = index;
     }
 
+    /*
+     * 특장 좋아요 토글 활성, 비활성상태에 따라 특장 카트에 넣고 뺌.
+     * 업데이트된 특장 카트에 맞게 좋아요 리스트 업데이트
+     */
     public void SpToggleListener()
     {
         if(SpDetailIndex != -1)
@@ -247,7 +265,7 @@ public class ButtonManager2 : MonoBehaviour
         btnManager3.Instants();
     }
 
-
+    //특장 상세정보 끄기
     public void SpDetailExit()
     {
         SpDetailIndex=-1;

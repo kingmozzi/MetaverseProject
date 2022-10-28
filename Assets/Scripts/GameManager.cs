@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        //가상 데이터 받아오기 
         items = getItems();
         cart = new List<Item>();
         SpItems = getSpItems();
@@ -182,22 +183,25 @@ public class GameManager : MonoBehaviour
         items[index].isLike = false;
         cart.Remove(items[index]);
     }
+    //좋아요 리스트에서 좋아요 취소한 제품을 카트에서 뺌
     public void deleteCartFromCart(int index)
     {
         cart[index].isLike = false;
         cart.Remove(cart[index]);
     }
-
+    //좋아요 누른 특장을 카트에 추가함
     public void addSpCart(int index)
     {
         SpItems[index].isLike = true;
         SpCart.Add(SpItems[index]);
     }
+    //좋아요 취소한 특장을 카트에서 뺌
     public void deleteSpCart(int index)
     {
         SpItems[index].isLike = false;
         SpCart.Remove(SpItems[index]);
     }
+    //좋아요 리스트에서 좋아요 취소한 특장을 카트에서 뺌
     public void deleteSpCartFromCart(int index)
     {
         SpCart[index].isLike = false;

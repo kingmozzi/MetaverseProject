@@ -50,7 +50,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    //새로고침 - x,y 좌표 초기화 시킨 후 새로 생성
+    //새로고침
     public void Refresh()
     {
         Transaction.GetList();
@@ -76,7 +76,7 @@ public class Board : MonoBehaviour
         Refresh();
     }
 
-    //다음 페이지
+    //다음 페이지, 게시물의 수가 최대가 아니면 마지막페이지이므로 페이지를 넘길 필요 없음.
     public void NextPage()
     {
         if(lastIndex >=7)
@@ -86,6 +86,12 @@ public class Board : MonoBehaviour
         Refresh();
     }
 
+    /*
+     * 게시판의 페이지가 마지막 페이지인지 확인
+     * 이전의 마지막 게시물의 id와 현재의 마지막 게시물 id 비교, 같으면 이전인덱스가 마지막페이지임.
+     * 페이지의 수가 체크, 페이지수가 1보다 크지않으면, 1페이지가 마지막 페이지임
+     * 게시물의 수가 최대 수일 때, 게시물의 수가 최대보다 작으면 마지막 페이지임
+     */
     public void pageCheck()
     {
         if(beforeLastId == afterLastId && Transaction.page > 1 && lastIndex >=7)

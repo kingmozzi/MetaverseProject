@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class RotateItem : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
+    //아이템 회전
     void Update()
     {
         transform.Rotate(Vector3.up * 20 * Time.deltaTime);
