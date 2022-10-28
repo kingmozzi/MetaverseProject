@@ -33,6 +33,8 @@ public class ButtonManager3 : MonoBehaviour
     public GameObject prefab;
     public LikePrefab getVariable;
 
+    public ButtonManager2 btnManager2;
+
     string companyName;
     int detailIndex;
     int SpDetailIndex;

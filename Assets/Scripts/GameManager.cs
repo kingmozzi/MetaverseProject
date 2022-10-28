@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
     public List<RectTransform> SpawnPositions;
     public List<RectTransform> PostSpawnPositions;
 
+    public int itemLength = 0;
+    public int ServiceItemLength = 0;
+    public int SpItemLength = 0;
+
     public bool isInfo;
 
     RaycastHit hit;
@@ -213,7 +217,7 @@ public class GameManager : MonoBehaviour
 
     //가상 데이터 입력
 
-    public int itemLength = 3;
+    
     public Sprite suspension;
     string[] names = {"네오테크 서스펜션 Basic", "네오테크 서스펜션 Comport", "네오테크 서스펜션 Sports"}; 
     string[] details = {"가장 기본적인 튜닝용 코일오버 서스펜션 입니다. 자신이 원하는 차고를 맞출 수 있으며 빨라진 핸들링 반응을 느끼실 수 있는 제품입니다.",
@@ -230,13 +234,12 @@ public class GameManager : MonoBehaviour
             Item itemTemp = new Item(names[i], details[i], values[i], grades[i], suspension);
             temp.Add(itemTemp);
         }
-
+        
+        itemLength = temp.Count;
         return temp;
     }
 
-    public int ServiceItemLength = 0;
-
-    public int SpItemLength = 3;
+    
     public Sprite[] SpImages;
     string[] SpNames = {"렉카용 쇽업소버", "화물 및 승합 스타렉스용 속업쇼버", "1톤 윙카용 SAFETY KIT"};
     string[] SpDetails = {"사고차량을 안전하게 끌기 위해 안정된 차고를 확보할 수 있도록 쇽업소버의 세팅을 변경하고 차량 견인 시 발생할 수 있는 앞바퀴 들림 현상을 완화하였습니다.",
@@ -252,6 +255,7 @@ public class GameManager : MonoBehaviour
             temp.Add(SpItemTemp);
         }
 
+        SpItemLength = temp.Count;
         return temp;
     }
 

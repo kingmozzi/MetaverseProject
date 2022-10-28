@@ -13,8 +13,8 @@ namespace UnityStandardAssets.CinematicEffects
                 return false;
             }
 
-            if (!SystemInfo.supportsImageEffects || !SystemInfo.supportsRenderTextures)
-                return false;
+            // if (!SystemInfo.supportsImageEffects || !SystemInfo.supportsRenderTextures)
+            //     return false;
 
             if (needDepth && !SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.Depth))
                 return false;
