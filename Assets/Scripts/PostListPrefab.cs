@@ -17,8 +17,8 @@ public class PostListPrefab : MonoBehaviour
 
     void Start()
     {
-        btnManager4 = GameObject.Find("Canvas").transform.Find("Community").GetComponent<ButtonManager4>();
-        board = GameObject.Find("Canvas").transform.Find("Community").transform.Find("CommuPanel").transform.Find("BoardPanel").GetComponent<Board>();
+        btnManager4 = GameObject.Find("Canvas/Community").GetComponent<ButtonManager4>();
+        board = GameObject.Find("Canvas/Community/CommuPanel/BoardPanel").GetComponent<Board>();
     }
 
     //새로고침 할 경우, 리스트를 새로 업데이트해야 하므로 본인 삭제

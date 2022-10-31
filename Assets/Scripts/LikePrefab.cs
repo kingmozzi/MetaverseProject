@@ -21,6 +21,16 @@ public class LikePrefab : MonoBehaviour
 
     void Update()
     {
+        if(index != -1)
+        {
+            btnManager3.itemBeforeBtn.onClick.AddListener(delegate{DeleteSelf();});
+            btnManager3.itemNextBtn.onClick.AddListener(delegate{DeleteSelf();});
+        }
+        else if(SpIndex != -1)
+        {
+            btnManager3.SpBeforeBtn.onClick.AddListener(delegate{DeleteSelf();});
+            btnManager3.SpNextBtn.onClick.AddListener(delegate{DeleteSelf();});
+        }
         btnManager2.isLike.onValueChanged.AddListener(delegate{DeleteSelf();});
         btnManager2.SpIsLike.onValueChanged.AddListener(delegate{DeleteSelf();});
         btnManager3.isLike.onValueChanged.AddListener(delegate{DeleteSelf();});

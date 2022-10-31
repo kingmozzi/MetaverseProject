@@ -30,6 +30,11 @@ public class ButtonManager3 : MonoBehaviour
     public Text SpDetail;
     public Toggle SpIsLike;
 
+    public Button itemNextBtn;
+    public Button itemBeforeBtn;
+    public Button SpNextBtn;
+    public Button SpBeforeBtn;
+
     public GameObject prefab;
     public LikePrefab getVariable;
 
@@ -38,6 +43,9 @@ public class ButtonManager3 : MonoBehaviour
     string companyName;
     int detailIndex;
     int SpDetailIndex;
+
+    int itemPage=1;
+    int spPage=1;
 
     void Awake()
     {  
@@ -61,12 +69,16 @@ public class ButtonManager3 : MonoBehaviour
             PartNull.SetActive(true);
             return;
         }
-        for(int i=0;i<Manager.cart.Count;i++)
+        for(int i=15*(itemPage-1);i<15*itemPage;i++)
         {
+            if(i>=Manager.cart.Count)
+            {
+                break;
+            }
             Item temp = Manager.cart[i];
             
             getVariable = prefab.GetComponent<LikePrefab>();
-            Vector2 createPoint = Manager.SpawnPositions[i].position;
+            Vector2 createPoint = Manager.SpawnPositions[i%15].position;
             getVariable.itemImage.sprite = temp.image;
             getVariable.nameText.text = temp.name;
             getVariable.index = i;
@@ -111,12 +123,16 @@ public class ButtonManager3 : MonoBehaviour
             SpecialNull.SetActive(true);
             return;
         }
-        for(int i=0;i<Manager.SpCart.Count;i++)
+        for(int i=15*(spPage-1);i<15*spPage;i++)
         {
+            if(i>=Manager.SpCart.Count)
+            {
+                break;
+            }
             SpecialItem temp = Manager.SpCart[i];
 
             getVariable = prefab.GetComponent<LikePrefab>();
-            Vector2 createPoint = Manager.SpawnPositions[i].position;
+            Vector2 createPoint = Manager.SpawnPositions[i%15].position;
             getVariable.itemBacground.color = new Color(124/255f, 126/255f, 125/255f);
             getVariable.nameText.text = temp.name;
             getVariable.itemImage.sprite = temp.image;
@@ -280,5 +296,38 @@ public class ButtonManager3 : MonoBehaviour
         SpDetailPanel.SetActive(false);
     }
 
+    public void itemNextPage()
+    {
+        if(itemPage*15 < Manager.cart.Count)
+        {
+            itemPage+=1;
+        }
+        InstantPart();
+    }
+
+    public void itemBeforePage()
+    {
+        if(itemPage>1){
+            itemPage-=1;
+        }
+        InstantPart();
+    }
+
+    public void SpNextPage()
+    {
+        if(spPage*15 < Manager.SpCart.Count)
+        {
+            spPage+=1;
+        }
+        InstantSpecial();
+    }
+
+    public void SpBeforePage()
+    {
+        if(spPage>1){
+            spPage-=1;
+        }
+        InstantSpecial();
+    }
 
 }

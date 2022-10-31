@@ -16,6 +16,24 @@ public class ItemPrefab : MonoBehaviour
         btnManager2 = GameObject.Find("Canvas/ServiceInfo").GetComponent<ButtonManager2>();
     }
 
+    void Update()
+    {
+        if(index != -1)
+        {
+            btnManager2.itemBeforeBtn.onClick.AddListener(delegate{DeleteSelf();});
+            btnManager2.itemNextBtn.onClick.AddListener(delegate{DeleteSelf();});
+        }
+        else if(SpIndex != -1)
+        {
+            btnManager2.SpBeforeBtn.onClick.AddListener(delegate{DeleteSelf();});
+            btnManager2.SpNextBtn.onClick.AddListener(delegate{DeleteSelf();});
+        }
+    }
+    
+    void DeleteSelf()
+    {
+        gameObject.SetActive(false);
+    }
 
     public void Onclick()
     {   

@@ -31,12 +31,20 @@ public class ButtonManager2 : MonoBehaviour
     public Text SpDetail;
     public Toggle SpIsLike;
 
+    public Button itemNextBtn;
+    public Button itemBeforeBtn;
+    public Button SpNextBtn;
+    public Button SpBeforeBtn;
+
     public GameObject prefab;
     public ItemPrefab getVariable;
 
     string companyName;
     int detailIndex;
     int SpDetailIndex;
+
+    int itemPage=1;
+    int spPage=1;
 
     void Awake()
     {  
@@ -52,12 +60,15 @@ public class ButtonManager2 : MonoBehaviour
         {
             PartNull.SetActive(true);
         }
-        for(int i=0;i<Manager.itemLength;i++)
+        for(int i=15*(itemPage-1);i<15*itemPage;i++)
         {
+            if(i>=Manager.itemLength){
+                break;
+            }
             Item temp = Manager.items[i];
             
             getVariable = prefab.GetComponent<ItemPrefab>();
-            Vector2 createPoint = Manager.SpawnPositions[i].position;
+            Vector2 createPoint = Manager.SpawnPositions[i%15].position;
             getVariable.itemImage.sprite = temp.image;
             getVariable.nameText.text = temp.name;
             getVariable.index = i;
@@ -99,12 +110,16 @@ public class ButtonManager2 : MonoBehaviour
         {
             SpecialNull.SetActive(true);
         }
-        for(int i=0;i<Manager.SpItemLength;i++)
+        for(int i=15*(spPage-1);i<15*spPage;i++)
         {
+            if(i>=Manager.SpItemLength)
+            {
+                break;
+            }
             SpecialItem temp = Manager.SpItems[i];
 
             getVariable = prefab.GetComponent<ItemPrefab>();
-            Vector2 createPoint = Manager.SpawnPositions[i].position;
+            Vector2 createPoint = Manager.SpawnPositions[i%15].position;
             getVariable.itemBacground.color = new Color(124/255f, 126/255f, 125/255f);
             getVariable.nameText.text = temp.name;
             getVariable.itemImage.sprite = temp.image;
@@ -271,6 +286,41 @@ public class ButtonManager2 : MonoBehaviour
         SpDetailIndex=-1;
         SpDetailPanel.SetActive(false);
     }
+
+    public void itemNextPage()
+    {
+        if(itemPage*15 < Manager.itemLength)
+        {
+            itemPage+=1;
+        }
+        InstantPart();
+    }
+
+    public void itemBeforePage()
+    {
+        if(itemPage>1){
+            itemPage-=1;
+        }
+        InstantPart();
+    }
+
+    public void SpNextPage()
+    {
+        if(spPage*15 < Manager.SpItemLength)
+        {
+            spPage+=1;
+        }
+        InstantSpecial();
+    }
+
+    public void SpBeforePage()
+    {
+        if(spPage>1){
+            spPage-=1;
+        }
+        InstantSpecial();
+    }
+
 
 
 }
