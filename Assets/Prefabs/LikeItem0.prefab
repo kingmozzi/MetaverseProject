@@ -220,7 +220,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 80137fe8d7c0a134eaa5a161623f5012, type: 3}
-    m_FontSize: 15
+    m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -386,4 +386,5 @@ MonoBehaviour:
   itemImage: {fileID: 6214200693617610723}
   index: -1
   SpIndex: -1
+  btnManager2: {fileID: 0}
   btnManager3: {fileID: 0}

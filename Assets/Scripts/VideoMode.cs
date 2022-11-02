@@ -8,9 +8,9 @@ public class VideoMode : MonoBehaviour
 {
     public GameObject VideoListPanel;
     public VideoPlayer VideoControl;
-    public VideoClip[] Videos;
 
-    void Start()
+
+    void Awake()
     {
         
     }
@@ -53,7 +53,15 @@ public class VideoMode : MonoBehaviour
     //비디오 선택
     public void VideoSelect(int index)
     {
-        VideoControl.clip = Videos[index];
+        try{
+            string temp = "video" + index.ToString() + ".mp4";
+            VideoControl.url =  "http://127.0.0.1:8000/static/StreamingAssets/" + temp;
+            VideoPlay(); 
+        }
+        catch{
+            
+        }
+        
     }
 
 

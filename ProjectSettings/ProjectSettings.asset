@@ -134,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.9
+  bundleVersion: 0.95
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -609,9 +609,9 @@ PlayerSettings:
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  webGLDecompressionFallback: 0
+  webGLDecompressionFallback: 1
   scriptingDefineSymbols:
-    Standalone: STARTER_ASSETS_PACKAGES_CHECKED;NEXPLAYER_SIMPLE_SAMPLE;NEXPLAYER_FULL_FEAT_SAMPLE
+    Standalone: Point;Light
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
