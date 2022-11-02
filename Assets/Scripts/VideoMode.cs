@@ -55,11 +55,11 @@ public class VideoMode : MonoBehaviour
     {
         try{
             string temp = "video" + index.ToString() + ".mp4";
-            VideoControl.url =  "http://127.0.0.1:8000/static/StreamingAssets/" + temp;
+            VideoControl.url =  "https://metaverseapiserver.herokuapp.com/static/StreamingAssets/"+temp;
             VideoPlay(); 
         }
         catch{
-            
+
         }
         
     }
