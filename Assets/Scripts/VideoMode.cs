@@ -12,7 +12,7 @@ public class VideoMode : MonoBehaviour
 
     void Awake()
     {
-        
+        VideoSelect(2);
     }
 
     void Update()

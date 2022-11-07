@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         cart = new List<Item>();
         SpItems = getSpItems();
         SpCart = new List<SpecialItem>();
-        VideoMode.GetComponent<VideoMode>().VideoSelect(2);
+        //VideoMode.GetComponent<VideoMode>().VideoSelect(2);
         
     }
 
