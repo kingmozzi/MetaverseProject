@@ -62,7 +62,6 @@ public class TransactionApi : MonoBehaviour
 
     public int page;
 
-    // Start is called before the first frame update
     void Start()
     {
         page = 1;
@@ -101,7 +100,7 @@ public class TransactionApi : MonoBehaviour
     //게시글 리스트 불러오기, 게시글을 8개씩 불러옴
     IEnumerator DataGet()
     {
-        string url = "https://metaverseapiserver.herokuapp.com/board?page="+page.ToString();
+        string url = "http://193.122.118.240/board?page="+page.ToString();
 
         using(UnityWebRequest www = UnityWebRequest.Get(url))
         {
@@ -122,7 +121,7 @@ public class TransactionApi : MonoBehaviour
     //CREATE
     IEnumerator DataPost()
     {
-        string url = "https://metaverseapiserver.herokuapp.com/board";
+        string url = "http://193.122.118.240/board";
         string title = postTitle.text;
         postTitle.text="";
         string writer = postWriter.text;
@@ -155,7 +154,7 @@ public class TransactionApi : MonoBehaviour
     //READ
     IEnumerator DataGetOne(int index)
     {
-        string url = "https://metaverseapiserver.herokuapp.com/board/" + index.ToString();
+        string url = "http://193.122.118.240/board/" + index.ToString();
 
         using(UnityWebRequest www = UnityWebRequest.Get(url))
         {
@@ -208,7 +207,7 @@ public class TransactionApi : MonoBehaviour
     //UPDATE
     IEnumerator DataUpdate(int index)
     {
-        string url = "https://metaverseapiserver.herokuapp.com/board/" + index.ToString();
+        string url = "http://193.122.118.240/board/" + index.ToString();
 
         string title = putTitle.text;
         string writer = putWriter.text;
@@ -238,7 +237,7 @@ public class TransactionApi : MonoBehaviour
     //DELETE
     IEnumerator DataDelete(int index)
     {
-        string url = "https://metaverseapiserver.herokuapp.com/board/" + index.ToString();
+        string url = "http://193.122.118.240/board/" + index.ToString();
 
         using(UnityWebRequest www = UnityWebRequest.Delete(url))
         {
